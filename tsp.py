@@ -29,7 +29,10 @@ class Tsp:
                 min_distance = total_distance
                 best_path = path  # Nie jest konieczne tworzenie listy
 
-        return list(best_path), min_distance
+        best_path = list(best_path)  # Konwertuj na listę tylko na końcu
+        best_path.append(best_path[0])  # Dodaj wierzchołek startowy na koniec
+
+        return best_path, min_distance
 
     def start(self):
         best_path, min_distance = self.brute_force_tsp()
