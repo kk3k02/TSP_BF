@@ -1,5 +1,6 @@
 import itertools
 
+
 class Tsp:
     def __init__(self, n, cost):
         self.n = n
@@ -16,20 +17,20 @@ class Tsp:
 
     def start(self):
         if self.n <= 2:
-            return (list(range(self.n)), 0)
+            return list(range(self.n)), 0
 
         vertices = list(range(self.n))
 
-        min_distance = float('inf')
-        best_tour = None
+        min_dist = float('inf')
+        best_path = None
 
-        for tour in itertools.permutations(vertices):
-            total_distance = self.calculate_total_distance(tour)
-            if total_distance < min_distance:
-                min_distance = total_distance
-                best_tour = tour
+        for path in itertools.permutations(vertices):
+            total_dist = self.calculate_total_distance(path)
+            if total_dist < min_dist:
+                min_dist = total_dist
+                best_path = path
 
-        best_tour = list(best_tour)  # Konwertuj na listę tylko na końcu
-        best_tour = best_tour + [best_tour[0]]  # Dodaj wierzchołek startowy na koniec trasy
+        best_path = list(best_path)  # Konwertuj na listę tylko na końcu
+        best_path = best_path + [best_path[0]]  # Dodaj wierzchołek startowy na koniec trasy
 
-        return min_distance, best_tour
+        return int(min_dist), best_path

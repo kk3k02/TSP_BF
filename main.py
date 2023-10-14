@@ -1,27 +1,39 @@
 import readFile
 import tsp
 import timeStamp
-
-# Ścieżka do pliku z danymi
-filePath = "dane.txt"
-time = timeStamp.TimeStamp()
+import saveToFile
+import readINI
 
 
 def main():
-    # Wczytanie macierzy sąsiedztwa
-    file = readFile.ReadFile(filePath)
-    data = file.readData()
+    time = timeStamp.TimeStamp()
+    times = []  # Wyniki pomiarów czasu
+    cost = 0  # Koszt wybranej ścieżki
+    path = []  # Najkrótsza ścieżka
 
-    # Wykonanie algorytmu
-    algorithm = tsp.Tsp(file.num_ver, data)
-    time.start()
-    path, distance = algorithm.start()
-    exec_time = time.end()
+    # Wczytywanie danych o liczbie powtórzeń i nazwach plików
+    reader = readINI.ReadINI("test.INI")
+    filePaths, repeat = reader.readData()
 
-    # Wydrukowanie wyniku
-    print("Najlepsza trasa:", path)
-    print("Minimalna odległość:", distance)
-    print("Czas wykonywania:", exec_time)
+    # Testowanie algorytmu
+    for i in range(len(repeat)):
+        # Wczytanie macierzy sąsiedztwa
+        file = readFile.ReadFile(filePaths[i])
+        data = file.readData()
+        algorithm = tsp.Tsp(file.num_ver, data)
+
+        for j in range(repeat[i]):
+            # Wykonanie algorytmu
+            time.start()
+            cost, path = algorithm.start()
+            exec_time = time.end()
+            times.append(exec_time)
+
+        # Zapisywanie do pliku wynikowego
+        saveFile = saveToFile.SaveToFile(filePaths[i], repeat[i], cost, path, times)
+        saveFile.save()
+
+        times = []  # Czyszczenie tablicy z czasami pomiarów
 
 
 # Start programu
