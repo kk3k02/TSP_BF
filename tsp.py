@@ -7,7 +7,7 @@ class Tsp:
 
     def calculate_total_distance(self, path):
         total_distance = 0
-        for i in range(len(path) - 1):
+        for i in range(self.num_ver - 1):
             start_node = path[i]
             end_node = path[i + 1]
             total_distance += self.graph[start_node][end_node]
@@ -27,11 +27,10 @@ class Tsp:
             total_distance = self.calculate_total_distance(path)
             if total_distance < min_distance:
                 min_distance = total_distance
-                best_path = list(path)
+                best_path = path  # Nie jest konieczne tworzenie listy
 
-        return best_path, min_distance
+        return list(best_path), min_distance
 
     def start(self):
-        tsp_solver = Tsp(self.num_ver, self.graph)
-        best_path, min_distance = tsp_solver.brute_force_tsp()
+        best_path, min_distance = self.brute_force_tsp()
         return best_path, min_distance
