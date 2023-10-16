@@ -36,4 +36,6 @@ class Tsp:
         best_path = list(best_path)
         best_path = best_path + [best_path[0]]  # Dodanie wierzchołka startowego na koniec trasy
 
+        print("Path: ", best_path, " Cost: ", int(min_dist))
+
         return int(min_dist), best_path  # Zwracanie najlepszej trasy i kosztu drogi

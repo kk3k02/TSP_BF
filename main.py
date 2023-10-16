@@ -28,10 +28,13 @@ def main():
             cost, path = algorithm.start()
             exec_time = time.end()
             times.append(exec_time)
+            print("Time: ", exec_time, " [s]")
+            print(int(((i/len(repeat))*100)), ".", int(((j/(repeat[i]))*100)), "%")
 
         # Zapisywanie do pliku wynikowego
         saveFile = saveToFile.SaveToFile(filePaths[i], repeat[i], cost, path, times)
         saveFile.save()
+        print("\n")
 
         times = []  # Czyszczenie tablicy z czasami pomiarów
 
