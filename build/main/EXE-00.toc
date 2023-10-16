@@ -98,7 +98,7 @@
  [],
  False,
  False,
- 1697304747,
+ 1697453816,
  [('run',
    '/home/kuba/Documents/PEA projekt/Zadanie '
    '1/venv/lib/python3.10/site-packages/PyInstaller/bootloader/Linux-64bit-intel/run',
